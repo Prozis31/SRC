@@ -1,0 +1,3 @@
+cut -d"," -f3 filtered_flows.csv | sort -u | while read -r line; do host "$line" | grep -v "not found" | uniq;done > Dns.txt
+
+cut -d"," -f3 filtered_flows.csv | sort -u | while read -r line; do echo "$line: $(dig -x "$line" +short | grep -v "not found" | grep -v '^$' | uniq)"; done > Dns.txt
